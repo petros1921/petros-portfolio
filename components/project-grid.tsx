@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { ProjectCard, type Project } from "./project-card";
 import Image from "next/image";
 
@@ -16,7 +19,7 @@ const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind"],
     media: (
       <Image
-        src="/mekbeb.png" // Ensure this is in your public folder
+        src="/mekbeb.png"
         alt="Garage Management System"
         width={800}
         height={450}
@@ -39,7 +42,7 @@ const projects: Project[] = [
     tags: ["HTML/CSS/JS", "Prismic", "Supabase", "PostgreSQL"],
     media: (
       <Image
-        src="/spot.jpg" // Ensure this matches your saved image name
+        src="/spot.jpg"
         alt="The Spot - Kitchen & Cocktail Lounge"
         width={800}
         height={450}
@@ -50,42 +53,48 @@ const projects: Project[] = [
     href: "https://github.com/petros1921/The-Spot-Website",
   },
   {
-    id: "enterprise-solutions",
-    title: "Enterprise Systems",
-    subtitle: "High-Ticket Build · Coming Soon",
+    id: "asni-donation",
+    title: "ASNI Donation",
+    subtitle: "Non-Profit Platform & CMS",
     description:
-      "A dedicated slot for upcoming enterprise-grade systems. Custom database architectures, multi-tenant business logic, and workflow automation for scaling operations.",
+      "A high-converting, fully responsive donation website for an Ethiopian education non-profit. Features a premium design system, headless CMS, and custom interactive components.",
     highlights: [
-      "Multi-tenant architecture",
-      "Automated workflow orchestration",
+      "Premium custom design system (Deep Forest Green & Warm Gold)",
+      "Sanity.io headless CMS with Portable Text rendering",
+      "Custom Masonry gallery with keyboard-navigable Lightbox",
+      "Seamless donation flow with QR codes & clipboard copy",
     ],
-    tags: ["Next.js", "Node.js", "System Design"],
+    tags: ["React.js", "Vite", "Sanity.io", "CSS3", "React Router"],
     media: (
-      <div className="flex h-full w-full flex-col items-center justify-center bg-zinc-100 space-y-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-300 bg-white">
-          <span className="text-zinc-400">🔒</span>
-        </div>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">
-          [ DATA_ENCRYPTED ]
-        </span>
-      </div>
+      <Image
+        src="/asni.jpg" // Make sure to save your ASNI screenshot as asni.jpg in the public folder!
+        alt="ASNI Donation Platform"
+        width={800}
+        height={450}
+        className="h-full w-full object-cover"
+      />
     ),
+    // liveUrl: "https://asni-donation.com", // Uncomment when live
+    // href: "https://github.com/petros1921/ASNI-Donation", // Uncomment to show source button
   },
 ];
 
 export function ProjectGrid() {
   return (
-    <section id="work" className="relative mx-auto max-w-6xl px-6 py-24 md:py-32 scroll-mt-24">
+    <section id="work" className="relative mx-auto max-w-6xl px-6 py-24 md:py-32 scroll-mt-24 overflow-hidden">
       
-      <div className="pointer-events-none absolute inset-0 flex justify-between px-6 opacity-30">
-        <div className="w-px h-full bg-zinc-200" />
-        <div className="w-px h-full bg-zinc-200 hidden md:block" />
-        <div className="w-px h-full bg-zinc-200 hidden md:block" />
-        <div className="w-px h-full bg-zinc-200" />
-      </div>
+      {/* Background Faint Grid (Matches other sections) */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
       <div className="relative z-10">
-        <div className="mb-12 flex flex-col items-start justify-between gap-4 border-b border-zinc-300 pb-4 sm:flex-row sm:items-end">
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 flex flex-col items-start justify-between gap-4 border-b border-zinc-300 pb-4 sm:flex-row sm:items-end"
+        >
           <h2 className="font-mono text-sm font-bold uppercase tracking-widest text-zinc-900">
             [ 02 // Selected Work ]
           </h2>
@@ -93,22 +102,44 @@ export function ProjectGrid() {
           <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-widest text-zinc-500">
             <span className="hidden sm:inline">SORT: DESC</span>
             <span className="hidden sm:inline text-zinc-300">|</span>
-            <span className="text-green-600 flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-green-600 animate-pulse" />
+            <span className="flex items-center gap-1.5 rounded-sm border border-zinc-200 bg-white px-2 py-1 text-green-600 shadow-sm">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-600" />
+              </span>
               {projects.length} Records Found
             </span>
           </div>
-        </div>
+        </motion.div>
 
+        {/* Project Cards */}
         <div className="flex flex-col gap-12 md:gap-16">
           {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+            >
+              <ProjectCard project={project} index={index} />
+            </motion.div>
           ))}
         </div>
         
-        <div className="mt-16 flex items-center justify-center font-mono text-[10px] uppercase tracking-widest text-zinc-400">
-          --- END OF RECORD ---
-        </div>
+        {/* End of Record */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-16 flex items-center justify-center gap-4"
+        >
+          <div className="h-px w-8 bg-zinc-300" />
+          <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">
+            --- END OF RECORD ---
+          </p>
+          <div className="h-px w-8 bg-zinc-300" />
+        </motion.div>
       </div>
     </section>
   );
