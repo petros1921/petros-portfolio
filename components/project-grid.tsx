@@ -42,9 +42,6 @@ const projects: Project[] = [
     media: (
       <Image src="/asni.jpg" alt="ASNI Donation Platform" width={800} height={450} className="h-full w-full object-cover" />
     ),
-    // Add these when you are ready:
-    // liveUrl: "https://asni-donation.com",
-    // href: "https://github.com/petros1921/ASNI-Donation",
   },
 ];
 
@@ -73,6 +70,7 @@ export function ProjectGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+              whileTap={{ scale: 0.98 }} // <-- ADDED: Shrinks the card slightly on mobile tap
             >
               <ProjectCard project={project} index={index} />
             </motion.div>

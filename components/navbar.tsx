@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { triggerHaptic } from "@/lib/haptics";
 
 const links = [
   { label: "About", href: "#about", id: "01" },
@@ -41,18 +42,16 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // Bulletproof scroll handler
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    setOpen(false); // Close mobile menu immediately
+    triggerHaptic(); // <-- Vibration on click
+    setOpen(false); 
     
     const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
     
     if (element) {
-      // Scroll smoothly to the element (respects scroll-mt-24)
       element.scrollIntoView({ behavior: "smooth" });
-      // Update the URL without triggering Next.js routing
       window.history.pushState(null, "", href);
     }
   };
@@ -92,6 +91,7 @@ export function Navbar() {
               href="#" 
               onClick={(e) => {
                 e.preventDefault();
+                triggerHaptic();
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               className="group flex items-center font-mono text-sm font-bold tracking-tighter text-zinc-900"
@@ -139,8 +139,11 @@ export function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <button
-            onClick={() => setOpen(!open)}
-            className="group flex flex-col gap-1.5 md:hidden p-2 -mr-2"
+            onClick={() => {
+              triggerHaptic(); // <-- Vibration on menu toggle
+              setOpen(!open);
+            }}
+            className="group flex flex-col gap-1.5 md:hidden p-2 -mr-2 touch-manipulation"
             aria-label="Toggle menu"
           >
             <span className={`h-0.5 w-6 bg-zinc-900 transition-transform duration-300 ${open ? "translate-y-2 rotate-45 bg-red-600" : ""}`} />
@@ -149,14 +152,14 @@ export function Navbar() {
           </button>
         </nav>
 
-        {/* 3. Mobile Nav (Floating Absolute Menu) */}
+        {/* 3. Mobile Nav (Spring Animation) */}
         <AnimatePresence>
           {open && (
             <motion.div 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
               className="absolute left-0 top-full w-full border-b border-zinc-800 bg-zinc-950 px-6 py-6 shadow-2xl md:hidden"
             >
               <div className="mb-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-zinc-500">
@@ -194,7 +197,7 @@ export function Navbar() {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, "#contact")}
-                className="mt-4 flex w-full items-center justify-between bg-red-600 px-4 py-3 font-mono text-xs uppercase tracking-widest text-white active:scale-95"
+                className="mt-4 flex w-full items-center justify-between bg-red-600 px-4 py-3 font-mono text-xs uppercase tracking-widest text-white active:scale-95 touch-manipulation"
               >
                 Contact Me
                 <span>→</span>
