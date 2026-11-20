@@ -50,7 +50,7 @@ export function Navbar() {
         style={{ scaleX }} 
       />
 
-      {/* 1. Top Micro-Status Bar (Plain English) */}
+      {/* 1. Top Micro-Status Bar */}
       <div className="border-b border-zinc-800 bg-zinc-950 px-6 py-1.5">
         <div className="mx-auto flex max-w-6xl items-center justify-between font-mono text-[9px] uppercase tracking-widest text-zinc-500">
           <div className="flex items-center gap-4">
@@ -58,18 +58,9 @@ export function Navbar() {
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
               Available for work
             </span>
-            
-            <span className="hidden sm:inline text-zinc-400">
-              Based in Addis Ababa
-            </span>
           </div>
-          
           <div className="flex items-center gap-4">
-            <a href="https://t.me/@Micku_19" target="_blank" rel="noreferrer" className="hover:text-zinc-300 transition-colors">
-              Telegram: @Micku_19
-            </a>
-            <span className="hidden sm:inline text-zinc-700">|</span>
-            <a href="mailto:petrosworku19@gmail.com" className="hidden sm:inline hover:text-zinc-300 transition-colors">
+            <a href="mailto:petrosworku19@gmail.com" className="hover:text-zinc-300 transition-colors">
               petrosworku19@gmail.com
             </a>
           </div>
@@ -77,15 +68,13 @@ export function Navbar() {
       </div>
 
       {/* 2. Main Nav */}
-      <div className="border-b border-zinc-200 bg-zinc-50/90 backdrop-blur-md">
+      <div className="relative border-b border-zinc-200 bg-zinc-50/90 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           
-          {/* Logo */}
           <div className="flex items-center gap-3">
             <a href="#" className="group flex items-center font-mono text-sm font-bold tracking-tighter text-zinc-900">
               <span className="mr-1.5 text-red-600 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110">▶</span>
               PETROS WORKU
-              <span className="ml-1 h-3.5 w-2 animate-pulse bg-zinc-400" />
             </a>
           </div>
 
@@ -107,7 +96,6 @@ export function Navbar() {
                     [{link.id}]
                   </span>
                   {link.label}
-                  
                   <span className={`absolute bottom-0 left-0 h-px bg-red-600 transition-all duration-300 ${
                     isActive ? "w-full" : "w-0 group-hover:w-full"
                   }`} />
@@ -135,19 +123,17 @@ export function Navbar() {
             <span className={`h-0.5 w-6 bg-zinc-900 transition-transform duration-300 ${open ? "-translate-y-2 -rotate-45 bg-red-600" : ""}`} />
           </button>
         </nav>
-      </div>
 
-      {/* 3. Mobile Nav */}
-      <AnimatePresence>
-        {open && (
-          <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden border-b border-zinc-800 bg-zinc-950 px-6 shadow-2xl md:hidden"
-          >
-            <div className="py-6">
+        {/* 3. Mobile Nav (Floating Absolute Menu) */}
+        <AnimatePresence>
+          {open && (
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="absolute left-0 top-full w-full border-b border-zinc-800 bg-zinc-950 px-6 py-6 shadow-2xl md:hidden"
+            >
               <div className="mb-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-zinc-500">
                 <span>Navigation</span>
                 <span className="text-green-500 flex items-center gap-1.5">
@@ -155,6 +141,7 @@ export function Navbar() {
                   Available
                 </span>
               </div>
+              
               <div className="flex flex-col gap-2">
                 {links.map((link) => {
                   const isActive = activeSection === link.href.replace("#", "");
@@ -187,10 +174,10 @@ export function Navbar() {
                 Contact Me
                 <span>→</span>
               </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </header>
   );
 }
