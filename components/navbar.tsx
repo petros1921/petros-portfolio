@@ -41,6 +41,22 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  // Bulletproof scroll handler
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setOpen(false); // Close mobile menu immediately
+    
+    const targetId = href.replace("#", "");
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      // Scroll smoothly to the element (respects scroll-mt-24)
+      element.scrollIntoView({ behavior: "smooth" });
+      // Update the URL without triggering Next.js routing
+      window.history.pushState(null, "", href);
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full">
       
@@ -72,7 +88,14 @@ export function Navbar() {
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           
           <div className="flex items-center gap-3">
-            <a href="#" className="group flex items-center font-mono text-sm font-bold tracking-tighter text-zinc-900">
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="group flex items-center font-mono text-sm font-bold tracking-tighter text-zinc-900"
+            >
               <span className="mr-1.5 text-red-600 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110">▶</span>
               PETROS WORKU
             </a>
@@ -86,6 +109,7 @@ export function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className={`group relative flex items-center gap-2 py-2 font-mono text-xs uppercase tracking-widest transition-colors ${
                     isActive ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-900"
                   }`}
@@ -105,6 +129,7 @@ export function Navbar() {
             
             <a
               href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
               className="group relative ml-4 overflow-hidden border border-zinc-900 bg-zinc-900 px-5 py-2 font-mono text-[10px] uppercase tracking-widest text-zinc-50 transition-all hover:border-red-600 active:scale-95"
             >
               <span className="absolute inset-0 -translate-x-full bg-red-600 transition-transform duration-300 ease-out group-hover:translate-x-0" />
@@ -149,7 +174,7 @@ export function Navbar() {
                     <a
                       key={link.label}
                       href={link.href}
-                      onClick={() => setOpen(false)}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       className={`group flex items-center gap-3 border p-3 font-mono text-xs uppercase tracking-widest transition-all ${
                         isActive
                           ? "border-red-600/50 bg-red-950/20 text-white"
@@ -168,7 +193,7 @@ export function Navbar() {
               
               <a
                 href="#contact"
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleNavClick(e, "#contact")}
                 className="mt-4 flex w-full items-center justify-between bg-red-600 px-4 py-3 font-mono text-xs uppercase tracking-widest text-white active:scale-95"
               >
                 Contact Me
