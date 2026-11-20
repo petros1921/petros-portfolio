@@ -9,18 +9,15 @@ export function Hero() {
       {/* Background Tech Rings (Subtle Depth) */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 -translate-x-1/2 opacity-30">
         <div className="h-[800px] w-[800px] rounded-full border border-zinc-200" />
-        
-        {/* Slowly Rotating Dashed Ring */}
         <motion.div 
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-zinc-300" 
         />
-        
         <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-200" />
       </div>
 
-      {/* Main Container - Now a motion.div for the entry animation */}
+      {/* Main Container */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -44,40 +41,38 @@ export function Hero() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-red-600" />
                 </span>
-                Status: Available for Work
+                Available for new projects
               </span>
               <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">
-                Loc: Addis Ababa, ET (UTC+3)
+                Based in Addis Ababa
               </span>
             </div>
 
-            <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tighter text-zinc-900 md:text-7xl lg:text-[5.5rem]">
-              I engineer <br />
-              <span className="text-red-600">systems</span> <br />
+            <h1 className="font-display text-4xl font-bold leading-[1.1] tracking-tight text-zinc-900 md:text-5xl lg:text-6xl">
+              I build <span className="text-red-600">systems</span> <br />
               that run <br />
-              businesses<span className="animate-pulse text-red-600">_</span>
+              your business<span className="animate-pulse text-red-600">_</span>
             </h1>
             
-            <p className="mt-8 max-w-md text-lg leading-relaxed text-zinc-600">
-              Petros Worku — Full-Stack Developer & Custom Systems Architect. 
-              I design and build custom operational software, inventory management systems, and high-performance web apps.
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-zinc-600">
+              I’m Petros, a Full-Stack Developer in Addis Ababa. I build custom software that tracks your stock, orders, and daily sales, so nothing gets lost on paper.
             </p>
 
-            {/* High-Converting Metric Bar */}
+            {/* Proof-Based Metrics */}
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 border-y border-zinc-200 py-4 font-mono">
-              <div className="group cursor-default flex flex-col">
-                <span className="text-xl font-bold text-zinc-900 transition-colors group-hover:text-red-600">15+</span>
-                <span className="text-[9px] uppercase tracking-widest text-zinc-500">Systems_Deployed</span>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-zinc-900">3</span>
+                <span className="text-[9px] uppercase tracking-widest text-zinc-500">Live Projects</span>
               </div>
               <div className="h-8 w-px bg-zinc-200" />
-              <div className="group cursor-default flex flex-col">
-                <span className="text-xl font-bold text-zinc-900 transition-colors group-hover:text-red-600">99.9%</span>
-                <span className="text-[9px] uppercase tracking-widest text-zinc-500">Uptime_Guaranteed</span>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-zinc-900">Local</span>
+                <span className="text-[9px] uppercase tracking-widest text-zinc-500">Ethiopian Calendar</span>
               </div>
               <div className="h-8 w-px bg-zinc-200" />
-              <div className="group cursor-default flex flex-col">
-                <span className="text-xl font-bold text-zinc-900 transition-colors group-hover:text-red-600">100%</span>
-                <span className="text-[9px] uppercase tracking-widest text-zinc-500">Custom_Built</span>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-zinc-900">24/7</span>
+                <span className="text-[9px] uppercase tracking-widest text-zinc-500">Post-Launch Support</span>
               </div>
             </div>
             
@@ -89,17 +84,17 @@ export function Hero() {
               >
                 <span className="absolute inset-0 -translate-x-full bg-red-600 transition-transform duration-300 ease-out group-hover:translate-x-0" />
                 <span className="relative z-10 flex items-center gap-2">
-                  View Case Studies
+                  See my work
                   <span className="text-lg leading-none transition-transform group-hover:translate-y-1">↓</span>
                 </span>
               </a>
 
-              {/* Secondary CTA */}
+              {/* Secondary CTA - Updated */}
               <a
                 href="#contact"
                 className="group relative flex items-center gap-2 border border-zinc-300 bg-white px-8 py-4 font-mono text-xs font-bold uppercase tracking-widest text-zinc-900 transition-all hover:border-zinc-900 active:scale-95"
               >
-                Book a Demo
+                Contact me
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-red-600">
                   →
                 </span>
@@ -118,7 +113,7 @@ export function Hero() {
                 <div className="h-2.5 w-2.5 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.5)] transition-all group-hover:shadow-[0_0_12px_rgba(220,38,38,0.8)]" />
               </div>
               <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">
-                sys_profile.ts
+                petros_profile.ts
               </span>
             </div>
 
@@ -133,17 +128,16 @@ export function Hero() {
               
               <div className="pl-4">
                 <p><span className="text-zinc-500">name:</span> <span className="text-amber-300">'Petros Worku'</span>,</p>
-                <p><span className="text-zinc-500">role:</span> <span className="text-amber-300">'Systems Architect'</span>,</p>
+                <p><span className="text-zinc-500">role:</span> <span className="text-amber-300">'Full-Stack Developer'</span>,</p>
                 <p><span className="text-zinc-500">location:</span> <span className="text-amber-300">'Addis Ababa'</span>,</p>
-                <p><span className="text-zinc-500">stack:</span> [</p>
+                <p><span className="text-zinc-500">builds:</span> [</p>
                 <div className="pl-4">
-                  <p><span className="text-amber-300">'Next.js'</span>,</p>
-                  <p><span className="text-amber-300">'TypeScript'</span>,</p>
-                  <p><span className="text-amber-300">'PostgreSQL'</span></p>
+                  <p><span className="text-amber-300">'Inventory Systems'</span>,</p>
+                  <p><span className="text-amber-300">'Custom Software'</span>,</p>
+                  <p><span className="text-amber-300">'High-Performance Web Apps'</span></p>
                 </div>
                 <p>],</p>
-                <p><span className="text-zinc-500">status:</span> <span className="text-green-400">'online'</span>,</p>
-                <p><span className="text-zinc-500">ready_for_hire:</span> <span className="text-red-400">true</span></p>
+                <p><span className="text-zinc-500">status:</span> <span className="text-green-400">'available'</span></p>
               </div>
 
               <div className="flex gap-2">
@@ -160,12 +154,11 @@ export function Hero() {
               </div>
             </div>
             
-            {/* Live Progress Bar (Fills up on hover) */}
+            {/* Live Progress Bar */}
             <div className="h-1 w-full bg-zinc-900">
               <div className="h-full w-1/3 bg-red-600 transition-all duration-[2000ms] ease-out group-hover:w-full group-hover:bg-green-500" />
             </div>
 
-            {/* Scanline overlay (Intensifies on hover) */}
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(18,18,18,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] opacity-20 transition-opacity duration-500 group-hover:opacity-40" />
           </div>
 

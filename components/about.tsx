@@ -1,9 +1,10 @@
 "use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export function About() {
   return (
-    // Added scroll-mt-24 so the sticky navbar doesn't hide the title
     <section id="about" className="relative mx-auto max-w-6xl px-6 py-24 md:py-32 scroll-mt-24 overflow-hidden">
       
       {/* Background Faint Grid */}
@@ -12,20 +13,31 @@ export function About() {
       <div className="relative z-10">
         
         {/* Section Header */}
-        <div className="mb-12 flex flex-col items-start justify-between gap-4 border-b border-zinc-300 pb-4 sm:flex-row sm:items-end">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12 flex flex-col items-start justify-between gap-4 border-b border-zinc-300 pb-4 sm:flex-row sm:items-end"
+        >
           <h2 className="font-mono text-sm font-bold uppercase tracking-widest text-zinc-900">
-            [ 01 // Profile Dossier ]
+            [ 01 // About Me ]
           </h2>
           <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-zinc-500">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-600" />
-            Clearance Level: Public
+            Open for new projects
           </span>
-        </div>
+        </motion.div>
 
         <div className="grid items-start gap-12 md:grid-cols-2 md:gap-16">
           
           {/* Left Side: Image / Photo Frame */}
-          <div className="relative border border-zinc-300 bg-white p-2 shadow-sm">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative border border-zinc-300 bg-white p-2 shadow-sm"
+          >
             
             {/* Frame Corner Brackets */}
             <div className="absolute -left-px -top-px z-30 h-4 w-4 border-l-2 border-t-2 border-zinc-900" />
@@ -35,18 +47,17 @@ export function About() {
             
             <div className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden bg-zinc-100">
               
-              {/* Fallback text if image is missing */}
               <span className="absolute z-0 font-mono text-xs uppercase tracking-widest text-zinc-400">
-                [ Awaiting_Image_Data ]
+                [ Loading Photo... ]
               </span>
               
-              {/* Your Image (Ensure 'your-photo.jpg' is in the public folder) */}
+              {/* Your Image (Ensure 'profile.jpg' is in the public folder) */}
               <Image
                 src="/profile.jpg"
                 alt="Petros Worku"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
+                className="relative z-10 object-cover grayscale transition-all duration-500 hover:scale-105 hover:grayscale-0"
               />
               
               {/* HUD Overlays */}
@@ -57,50 +68,49 @@ export function About() {
                 {/* Scanlines effect */}
                 <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.05)_50%)] bg-[length:100%_4px]" />
                 
-                {/* Top Left Coordinates */}
-                <div className="absolute left-2 top-2 font-mono text-[9px] uppercase tracking-widest text-white/70 mix-blend-difference">
-                  LAT: 9.0320 N<br />
-                  LON: 38.7469 E
-                </div>
-
-                {/* Top Right REC Indicator */}
+                {/* Top Right Status */}
                 <div className="absolute right-2 top-2 flex items-center gap-1.5 rounded-sm bg-black/50 px-2 py-0.5 backdrop-blur-md">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-white">REC</span>
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-white">Live</span>
                 </div>
               </div>
             </div>
 
             {/* Frame Footer */}
             <div className="mt-2 flex items-center justify-between border-t border-zinc-200 px-1 pt-2 font-mono text-[10px] uppercase tracking-widest text-zinc-500">
-              <span>FILE: IMG_001.jpg</span>
+              <span>PETROS_WORKU.JPG</span>
               <span className="flex items-center gap-1 text-green-600">
                 <span className="h-1 w-1 rounded-full bg-green-600" />
-                Verified
+                Available
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Side: Bio Data */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <h3 className="font-display text-4xl font-bold tracking-tight text-zinc-900 md:text-5xl">
               Architecting <br />
               <span className="text-red-600">Order</span> from Chaos.
             </h3>
             
             <p className="mt-6 text-lg leading-relaxed text-zinc-600">
-              I am a Full-Stack Developer and Systems Architect based in Addis Ababa. My focus is on building custom operational software that solves physical, real-world business problems.
+              I am a Full-Stack Developer based in Addis Ababa. My focus is on building custom operational software that solves real-world business problems.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-zinc-600">
               Whether it is an inventory system for an automotive garage or a high-performance web application, I engineer tools that eliminate bottlenecks, prevent revenue leakage, and streamline daily workflows.
             </p>
 
-            {/* Data Nodes (Capabilities) */}
+            {/* Skills / Capabilities */}
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
               
               <div className="group relative border border-zinc-200 bg-white p-5 transition-all duration-300 hover:border-red-600 hover:shadow-sm">
                 <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-zinc-400">
-                  <span className="transition-colors group-hover:text-red-600">NODE_01</span>
+                  <span className="transition-colors group-hover:text-red-600">[01]</span>
                   <span>■</span>
                 </div>
                 <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-900">
@@ -113,7 +123,7 @@ export function About() {
               
               <div className="group relative border border-zinc-200 bg-white p-5 transition-all duration-300 hover:border-red-600 hover:shadow-sm">
                 <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-zinc-400">
-                  <span className="transition-colors group-hover:text-red-600">NODE_02</span>
+                  <span className="transition-colors group-hover:text-red-600">[02]</span>
                   <span>■</span>
                 </div>
                 <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-900">
@@ -126,7 +136,7 @@ export function About() {
               
               <div className="group relative border border-zinc-200 bg-white p-5 transition-all duration-300 hover:border-red-600 hover:shadow-sm">
                 <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-zinc-400">
-                  <span className="transition-colors group-hover:text-red-600">NODE_03</span>
+                  <span className="transition-colors group-hover:text-red-600">[03]</span>
                   <span>■</span>
                 </div>
                 <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-900">
@@ -139,7 +149,7 @@ export function About() {
 
               <div className="group relative border border-zinc-200 bg-white p-5 transition-all duration-300 hover:border-red-600 hover:shadow-sm">
                 <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-zinc-400">
-                  <span className="transition-colors group-hover:text-red-600">NODE_04</span>
+                  <span className="transition-colors group-hover:text-red-600">[04]</span>
                   <span>■</span>
                 </div>
                 <h4 className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-900">
@@ -151,7 +161,7 @@ export function About() {
               </div>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

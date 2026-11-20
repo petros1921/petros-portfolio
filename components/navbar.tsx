@@ -14,7 +14,6 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
-  // Scroll Progress Bar
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -22,7 +21,6 @@ export function Navbar() {
     restDelta: 0.001
   });
 
-  // Scroll Spy: Automatically tracks which section is currently in view
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -52,36 +50,28 @@ export function Navbar() {
         style={{ scaleX }} 
       />
 
-      {/* 1. Top Micro-Status Bar (HUD Detail) */}
+      {/* 1. Top Micro-Status Bar (Plain English) */}
       <div className="border-b border-zinc-800 bg-zinc-950 px-6 py-1.5">
         <div className="mx-auto flex max-w-6xl items-center justify-between font-mono text-[9px] uppercase tracking-widest text-zinc-500">
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-1.5 text-green-500">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
-              SYS_ONLINE
+              Available for work
             </span>
             
-            {/* Signal Bars */}
-            <span className="hidden items-end gap-[2px] sm:flex">
-              <span className="h-1 w-[2px] bg-green-500" />
-              <span className="h-1.5 w-[2px] bg-green-500" />
-              <span className="h-2 w-[2px] bg-green-500" />
-              <span className="h-2.5 w-[2px] bg-green-500" />
+            <span className="hidden sm:inline text-zinc-400">
+              Based in Addis Ababa
             </span>
-
-            <span className="hidden sm:inline">NODE: ADDIS_ABABA</span>
           </div>
           
           <div className="flex items-center gap-4">
-            <span className="hidden md:inline">PING: 12ms</span>
-            <span className="hidden sm:inline">MEM: 84%</span>
-            <span className="flex items-center gap-1">
-              <span className="h-2 w-4 rounded-[1px] border border-zinc-600 p-[1px]">
-                <span className="block h-full w-3/4 bg-green-500" />
-              </span>
-              84%
-            </span>
-            <span className="text-zinc-600">v.2.4.1</span>
+            <a href="https://t.me/@Micku_19" target="_blank" rel="noreferrer" className="hover:text-zinc-300 transition-colors">
+              Telegram: @Micku_19
+            </a>
+            <span className="hidden sm:inline text-zinc-700">|</span>
+            <a href="mailto:petrosworku19@gmail.com" className="hidden sm:inline hover:text-zinc-300 transition-colors">
+              petrosworku19@gmail.com
+            </a>
           </div>
         </div>
       </div>
@@ -90,16 +80,13 @@ export function Navbar() {
       <div className="border-b border-zinc-200 bg-zinc-50/90 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           
-          {/* Logo + Command Palette Hint */}
+          {/* Logo */}
           <div className="flex items-center gap-3">
             <a href="#" className="group flex items-center font-mono text-sm font-bold tracking-tighter text-zinc-900">
               <span className="mr-1.5 text-red-600 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110">▶</span>
-              PETROS_WORKU<span className="text-zinc-400">.SYS</span>
+              PETROS WORKU
               <span className="ml-1 h-3.5 w-2 animate-pulse bg-zinc-400" />
             </a>
-            <span className="hidden border border-zinc-300 bg-white px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-zinc-400 transition-colors hover:border-zinc-400 hover:text-zinc-600 cursor-pointer lg:inline">
-              ⌘K
-            </span>
           </div>
 
           {/* Desktop Nav */}
@@ -121,7 +108,6 @@ export function Navbar() {
                   </span>
                   {link.label}
                   
-                  {/* Active Indicator */}
                   <span className={`absolute bottom-0 left-0 h-px bg-red-600 transition-all duration-300 ${
                     isActive ? "w-full" : "w-0 group-hover:w-full"
                   }`} />
@@ -134,7 +120,7 @@ export function Navbar() {
               className="group relative ml-4 overflow-hidden border border-zinc-900 bg-zinc-900 px-5 py-2 font-mono text-[10px] uppercase tracking-widest text-zinc-50 transition-all hover:border-red-600 active:scale-95"
             >
               <span className="absolute inset-0 -translate-x-full bg-red-600 transition-transform duration-300 ease-out group-hover:translate-x-0" />
-              <span className="relative z-10">Initiate_Contact</span>
+              <span className="relative z-10">Contact Me</span>
             </a>
           </div>
 
@@ -151,7 +137,7 @@ export function Navbar() {
         </nav>
       </div>
 
-      {/* 3. Mobile Nav (Terminal Dropdown with Framer Motion) */}
+      {/* 3. Mobile Nav */}
       <AnimatePresence>
         {open && (
           <motion.div 
@@ -163,10 +149,10 @@ export function Navbar() {
           >
             <div className="py-6">
               <div className="mb-4 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-zinc-500">
-                <span>~/menu/directory/</span>
+                <span>Navigation</span>
                 <span className="text-green-500 flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
-                  SECURE
+                  Available
                 </span>
               </div>
               <div className="flex flex-col gap-2">
@@ -193,13 +179,12 @@ export function Navbar() {
                 })}
               </div>
               
-              {/* Mobile Contact CTA */}
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
                 className="mt-4 flex w-full items-center justify-between bg-red-600 px-4 py-3 font-mono text-xs uppercase tracking-widest text-white active:scale-95"
               >
-                Initiate_Contact
+                Contact Me
                 <span>→</span>
               </a>
             </div>

@@ -5,23 +5,33 @@ import { motion } from "framer-motion";
 const groups = [
   { 
     id: "MOD_01",
-    label: "FRONTEND_LAYER", 
-    items: ["React", "Next.js", "Vue.js", "Nuxt.js", "TypeScript", "Tailwind CSS", "HTML5 / CSS3"] 
+    label: "FRONTEND_CORE", 
+    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML5 / CSS3"] 
   },
   { 
     id: "MOD_02",
-    label: "BACKEND_INFRA", 
-    items: ["Node.js", "Express.js", "Python / Flask", "REST APIs", "GraphQL", "Business Logic"] 
+    label: "ALTERNATE_FRAMEWORKS", 
+    items: ["Vue.js", "Nuxt.js", "JavaScript (ES6+)"] 
   },
   { 
     id: "MOD_03",
-    label: "DATABASE_SYS", 
-    items: ["PostgreSQL", "Supabase", "MongoDB", "MySQL", "SQLite", "Prismic CMS"] 
+    label: "BACKEND_INFRA", 
+    items: ["Node.js", "Express.js", "Python / Flask", "REST APIs", "GraphQL"] 
   },
   { 
     id: "MOD_04",
+    label: "DATABASE_SYS", 
+    items: ["PostgreSQL", "Supabase", "MongoDB", "MySQL", "SQLite"] 
+  },
+  { 
+    id: "MOD_05",
+    label: "CMS_PLATFORMS", 
+    items: ["Prismic", "Sanity.io", "Headless Architecture"] 
+  },
+  { 
+    id: "MOD_06",
     label: "TOOLS_WORKFLOW", 
-    items: ["Git / Version Control", "Responsive Design", "Media Workflows", "DaVinci Resolve"] 
+    items: ["Git / Version Control", "Responsive Design", "DaVinci Resolve", "Media Workflows"] 
   },
 ];
 
@@ -39,25 +49,22 @@ export function TechStack() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="mb-12 flex flex-col items-start justify-between gap-4 border-b border-zinc-800 pb-4 sm:flex-row sm:items-end"
         >
-          <div>
-            <h2 className="font-mono text-sm font-bold uppercase tracking-widest text-zinc-100">
-              [ 03 // Capabilities Matrix ]
-            </h2>
-          </div>
+          <h2 className="font-mono text-sm font-bold uppercase tracking-widest text-zinc-100">
+            [ 04 // My Tech Stack ]
+          </h2>
           <div className="flex items-center gap-3 rounded-sm border border-zinc-800 bg-zinc-900/50 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-zinc-400">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
             </span>
-            All Modules Online
+            Full Stack Capable
           </div>
         </motion.div>
         
-        {/* Grid of Modules */}
-        <div className="grid gap-6 md:grid-cols-2">
+        {/* Grid of Modules (3 columns on large screens) */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {groups.map((group, index) => (
             <motion.div 
               key={group.label} 
@@ -77,7 +84,7 @@ export function TechStack() {
               <div className="mb-5 flex items-center justify-between border-b border-zinc-800/80 pb-3">
                 <div className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-zinc-700 transition-colors group-hover:bg-red-500 group-hover:animate-pulse" />
-                  <h3 className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-300 transition-colors group-hover:text-red-500">
+                  <h3 className="font-mono text-[11px] font-bold uppercase tracking-widest text-zinc-300 transition-colors group-hover:text-red-500">
                     {group.label}
                   </h3>
                 </div>
@@ -87,7 +94,7 @@ export function TechStack() {
               </div>
 
               {/* Items List */}
-              <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2">
+              <ul className="flex flex-col gap-1.5">
                 {group.items.map((item, idx) => (
                   <li 
                     key={item} 
@@ -99,7 +106,6 @@ export function TechStack() {
                       </span>
                       {item}
                     </div>
-                    {/* System Status Box */}
                     <span className="text-[8px] text-zinc-700 transition-colors group-hover/item:text-red-500/70">
                       ■
                     </span>
@@ -119,7 +125,7 @@ export function TechStack() {
         >
           <div className="h-px w-12 bg-zinc-800" />
           <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500">
-            [ System Check Complete // 100% Operational ]
+            [ Matrix Check Complete // 6 Modules Loaded ]
           </p>
           <div className="h-px w-12 bg-zinc-800" />
         </motion.div>
